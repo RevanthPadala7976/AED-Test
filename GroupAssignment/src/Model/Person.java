@@ -15,27 +15,11 @@ public class Person {
     private String LastName;
     private String EmailID;
     private String ID;
-    private RollType position;
-    private String UserName;
     
-    //SHOULD NOT STORE IN THE CHAR ARRAY 
-    private char[] Password;
-    //Roll is user to differenciate between professor and student while logging in to the system
-    public enum RollType{
-        Student, 
-        Professor;
-    }
 
     
 
     //Getter and Setter for all the attributes
-    public void setPosition(RollType position) {
-        this.position = position;
-    }
-    
-    public RollType getPosition() {
-        return position;
-    }
 
     public String getFirstName() {
         return FirstName;
@@ -67,21 +51,5 @@ public class Person {
 
     public void setID(String ID) {
         this.ID = ID;
-    }
-    
-    public String getUserName() {
-        return UserName;
-    }
-
-    public void setUserName(String UserName) {
-        this.UserName = UserName;
-    }
-
-    public char[] getPassword() {
-        return Password;
-    }
-
-    public void setPassword(char[] Password) {
-        this.Password = Password;
     } 
 }

@@ -4,6 +4,9 @@
  */
 package UserInterface;
 
+import java.awt.CardLayout;
+import java.awt.Component;
+
 /**
  *
  * @author revanth
@@ -27,24 +30,15 @@ public class MainJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        OuterJPanel = new javax.swing.JPanel();
-        InnerJPanel = new javax.swing.JPanel();
-        ProfessorLogInJPanel = new javax.swing.JPanel();
-        btn_ProfSignUp = new javax.swing.JButton();
-        btn_ProfLogIn = new javax.swing.JButton();
-        jpf_ProfPassword = new javax.swing.JPasswordField();
-        lbl_ProfPassword = new javax.swing.JLabel();
-        lbl_ProfUserName = new javax.swing.JLabel();
-        txt_ProfUserName = new javax.swing.JTextField();
-        lbl_ProfTitle = new javax.swing.JLabel();
-        StudentLogInJPanel = new javax.swing.JPanel();
-        lbl_StudentUserName = new javax.swing.JLabel();
-        lbl_StudentPassword = new javax.swing.JLabel();
-        txt_StudentUserName = new javax.swing.JTextField();
-        jpf_StudentPassword = new javax.swing.JPasswordField();
-        btn_StudentLogIn = new javax.swing.JButton();
-        btn_StudentSignUp = new javax.swing.JButton();
-        lbl_StudentTitle = new javax.swing.JLabel();
+        WorkAreaJPanel = new javax.swing.JPanel();
+        LogInJPanel = new javax.swing.JPanel();
+        lbl_UserName = new javax.swing.JLabel();
+        lbl_Password = new javax.swing.JLabel();
+        txt_UserName = new javax.swing.JTextField();
+        jpf_Password = new javax.swing.JPasswordField();
+        btn_LogIn = new javax.swing.JButton();
+        btn_SignUp = new javax.swing.JButton();
+        lbl_SubTitle = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -60,154 +54,83 @@ public class MainJFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new java.awt.CardLayout());
 
-        InnerJPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "SkillPulse", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 1, 24), new java.awt.Color(0, 102, 255))); // NOI18N
+        WorkAreaJPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "SkillPulse", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Helvetica Neue", 1, 36), new java.awt.Color(0, 102, 255))); // NOI18N
+        WorkAreaJPanel.setLayout(new java.awt.CardLayout());
 
-        ProfessorLogInJPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("For Professor"));
-        ProfessorLogInJPanel.setPreferredSize(new java.awt.Dimension(300, 300));
+        lbl_UserName.setText("User Name:");
 
-        btn_ProfSignUp.setText("Sign UP");
+        lbl_Password.setText("Password:");
 
-        btn_ProfLogIn.setText("Log In");
+        btn_LogIn.setText("Log In");
 
-        lbl_ProfPassword.setText("Password:");
+        btn_SignUp.setText("Sign Up");
+        btn_SignUp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SignUpActionPerformed(evt);
+            }
+        });
 
-        lbl_ProfUserName.setText("User Name:");
+        lbl_SubTitle.setText("Please enter your Login Details");
 
-        lbl_ProfTitle.setText("Please enter your Login Details");
-
-        javax.swing.GroupLayout ProfessorLogInJPanelLayout = new javax.swing.GroupLayout(ProfessorLogInJPanel);
-        ProfessorLogInJPanel.setLayout(ProfessorLogInJPanelLayout);
-        ProfessorLogInJPanelLayout.setHorizontalGroup(
-            ProfessorLogInJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ProfessorLogInJPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(ProfessorLogInJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lbl_ProfPassword)
-                    .addComponent(lbl_ProfUserName))
+        javax.swing.GroupLayout LogInJPanelLayout = new javax.swing.GroupLayout(LogInJPanel);
+        LogInJPanel.setLayout(LogInJPanelLayout);
+        LogInJPanelLayout.setHorizontalGroup(
+            LogInJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LogInJPanelLayout.createSequentialGroup()
+                .addGap(102, 102, 102)
+                .addGroup(LogInJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbl_Password)
+                    .addComponent(lbl_UserName))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(ProfessorLogInJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_ProfTitle)
-                    .addGroup(ProfessorLogInJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txt_ProfUserName)
-                        .addComponent(jpf_ProfPassword)
-                        .addGroup(ProfessorLogInJPanelLayout.createSequentialGroup()
-                            .addComponent(btn_ProfLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                            .addComponent(btn_ProfSignUp))))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addGroup(LogInJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_SubTitle)
+                    .addGroup(LogInJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(LogInJPanelLayout.createSequentialGroup()
+                            .addComponent(btn_LogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                            .addComponent(btn_SignUp, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txt_UserName, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jpf_Password, javax.swing.GroupLayout.Alignment.LEADING)))
+                .addContainerGap(316, Short.MAX_VALUE))
         );
-        ProfessorLogInJPanelLayout.setVerticalGroup(
-            ProfessorLogInJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ProfessorLogInJPanelLayout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(lbl_ProfTitle)
-                .addGap(31, 31, 31)
-                .addGroup(ProfessorLogInJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_ProfUserName)
-                    .addComponent(txt_ProfUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(ProfessorLogInJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_ProfPassword)
-                    .addComponent(jpf_ProfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(ProfessorLogInJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_ProfLogIn)
-                    .addComponent(btn_ProfSignUp))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        StudentLogInJPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("For Students"));
-
-        lbl_StudentUserName.setText("User Name:");
-
-        lbl_StudentPassword.setText("Password:");
-
-        btn_StudentLogIn.setText("Log In");
-
-        btn_StudentSignUp.setText("Sign UP");
-
-        lbl_StudentTitle.setText("Please enter your Login Details");
-
-        javax.swing.GroupLayout StudentLogInJPanelLayout = new javax.swing.GroupLayout(StudentLogInJPanel);
-        StudentLogInJPanel.setLayout(StudentLogInJPanelLayout);
-        StudentLogInJPanelLayout.setHorizontalGroup(
-            StudentLogInJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(StudentLogInJPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(StudentLogInJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lbl_StudentPassword)
-                    .addComponent(lbl_StudentUserName))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(StudentLogInJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lbl_StudentTitle)
-                    .addGroup(StudentLogInJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(txt_StudentUserName)
-                        .addComponent(jpf_StudentPassword)
-                        .addGroup(StudentLogInJPanelLayout.createSequentialGroup()
-                            .addComponent(btn_StudentLogIn, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                            .addComponent(btn_StudentSignUp))))
-                .addContainerGap(29, Short.MAX_VALUE))
-        );
-        StudentLogInJPanelLayout.setVerticalGroup(
-            StudentLogInJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(StudentLogInJPanelLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(lbl_StudentTitle)
+        LogInJPanelLayout.setVerticalGroup(
+            LogInJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(LogInJPanelLayout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(lbl_SubTitle)
                 .addGap(33, 33, 33)
-                .addGroup(StudentLogInJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_StudentUserName)
-                    .addComponent(txt_StudentUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(LogInJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_UserName)
+                    .addComponent(txt_UserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(StudentLogInJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_StudentPassword)
-                    .addComponent(jpf_StudentPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(StudentLogInJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_StudentLogIn)
-                    .addComponent(btn_StudentSignUp))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addGroup(LogInJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_Password)
+                    .addComponent(jpf_Password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(LogInJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_LogIn)
+                    .addComponent(btn_SignUp))
+                .addContainerGap(331, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout InnerJPanelLayout = new javax.swing.GroupLayout(InnerJPanel);
-        InnerJPanel.setLayout(InnerJPanelLayout);
-        InnerJPanelLayout.setHorizontalGroup(
-            InnerJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(InnerJPanelLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(ProfessorLogInJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(StudentLogInJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
-        );
-        InnerJPanelLayout.setVerticalGroup(
-            InnerJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(InnerJPanelLayout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addGroup(InnerJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(ProfessorLogInJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
-                    .addComponent(StudentLogInJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(242, Short.MAX_VALUE))
-        );
+        WorkAreaJPanel.add(LogInJPanel, "card2");
 
-        javax.swing.GroupLayout OuterJPanelLayout = new javax.swing.GroupLayout(OuterJPanel);
-        OuterJPanel.setLayout(OuterJPanelLayout);
-        OuterJPanelLayout.setHorizontalGroup(
-            OuterJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(InnerJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        OuterJPanelLayout.setVerticalGroup(
-            OuterJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(OuterJPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(InnerJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        getContentPane().add(OuterJPanel, "card2");
+        getContentPane().add(WorkAreaJPanel, "card2");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_SignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SignUpActionPerformed
+        // TODO add your handling code here:
+        
+        SignUpJPanel SignUpPanel = new SignUpJPanel();
+        WorkAreaJPanel.add("SignUpPanel", SignUpPanel);
+        
+        WorkAreaJPanel.remove(this);
+        CardLayout layout = (CardLayout) WorkAreaJPanel.getLayout();
+        layout.next(WorkAreaJPanel);
+        
+    }//GEN-LAST:event_btn_SignUpActionPerformed
 
     /**
      * @param args the command line arguments
@@ -245,24 +168,15 @@ public class MainJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel InnerJPanel;
-    private javax.swing.JPanel OuterJPanel;
-    private javax.swing.JPanel ProfessorLogInJPanel;
-    private javax.swing.JPanel StudentLogInJPanel;
-    private javax.swing.JButton btn_ProfLogIn;
-    private javax.swing.JButton btn_ProfSignUp;
-    private javax.swing.JButton btn_StudentLogIn;
-    private javax.swing.JButton btn_StudentSignUp;
+    private javax.swing.JPanel LogInJPanel;
+    private javax.swing.JPanel WorkAreaJPanel;
+    private javax.swing.JButton btn_LogIn;
+    private javax.swing.JButton btn_SignUp;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPasswordField jpf_ProfPassword;
-    private javax.swing.JPasswordField jpf_StudentPassword;
-    private javax.swing.JLabel lbl_ProfPassword;
-    private javax.swing.JLabel lbl_ProfTitle;
-    private javax.swing.JLabel lbl_ProfUserName;
-    private javax.swing.JLabel lbl_StudentPassword;
-    private javax.swing.JLabel lbl_StudentTitle;
-    private javax.swing.JLabel lbl_StudentUserName;
-    private javax.swing.JTextField txt_ProfUserName;
-    private javax.swing.JTextField txt_StudentUserName;
+    private javax.swing.JPasswordField jpf_Password;
+    private javax.swing.JLabel lbl_Password;
+    private javax.swing.JLabel lbl_SubTitle;
+    private javax.swing.JLabel lbl_UserName;
+    private javax.swing.JTextField txt_UserName;
     // End of variables declaration//GEN-END:variables
 }

@@ -11,7 +11,10 @@
 package UserInterface.WorkAreas.FacultyRole;
 
 import Business.Business;
+import UserInterface.WorkArea.Faculty.ManageCourses.ManageCoursesJPanel;
+import UserInterface.WorkArea.Faculty.ManageCourses.ManageStudentsProfilesJPanel;
 import UserInterface.WorkAreas.AdminRole.ManagePersonnelWorkResp.ManagePersonsJPanel;
+import UserInterface.WorkAreas.AdminRole.MyProfile.AdminMyProfileJpanel;
 import javax.swing.JPanel;
 
 /**
@@ -149,11 +152,15 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
 
     private void jButton4IdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4IdentifyResourceAssetsActionPerformed
         // TODO add your handling code here:
-        CardSequencePanel.removeAll();
+        
+        /*
+            Need to change the below code.
+            It should give manage courses JPanel
+        */
 
-        ManagePersonsJPanel aos = new ManagePersonsJPanel(business, CardSequencePanel);
+        ManageCoursesJPanel courses = new ManageCoursesJPanel(business, CardSequencePanel);
 
-        CardSequencePanel.add("ManageVulns", aos);
+        CardSequencePanel.add("ManageCourses", courses);
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
 
     }//GEN-LAST:event_jButton4IdentifyResourceAssetsActionPerformed
@@ -161,19 +168,19 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         // TODO add your handling code here:
 
- //       ManageSuppliersJPanel iet = new ManageSuppliersJPanel(business, CardSequencePanel);
+       ManageStudentsProfilesJPanel msp = new ManageStudentsProfilesJPanel(business, CardSequencePanel);
 
-//        CardSequencePanel.add("FindResourceAsset", iet);
-//        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+        CardSequencePanel.add("ManageStudentsProfiles", msp);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
 
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton6IdentifyEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6IdentifyEventsActionPerformed
         // TODO add your handling code here:
-        CardSequencePanel.removeAll();
-        //    IdentifyEventTypes iet= new IdentifyEventTypes(businessunit, CardSequencePanel);
+        
+        AdminMyProfileJpanel myp =  new AdminMyProfileJpanel(business, CardSequencePanel);
 
-        //    CardSequencePanel.add("IdentifyEventTypes", iet);
+        CardSequencePanel.add("view profile", myp);
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
         //((java.awt.CardLayout)CardSequencePanel.getLayout()).show(CardSequencePanel, "IdentifyEventTypes");
 }//GEN-LAST:event_jButton6IdentifyEventsActionPerformed

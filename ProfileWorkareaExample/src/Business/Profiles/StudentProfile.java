@@ -14,7 +14,9 @@ import Business.Person.Person;
 public class StudentProfile extends Profile {
 
     Person person;
-    private double CPA;
+
+    
+    private double CGPA;
 //    Transcript transcript;
     //   EmploymentHistroy employmenthistory;
 
@@ -33,5 +35,14 @@ public class StudentProfile extends Profile {
     public boolean isMatch(String id) {
         return person.getPersonId().equals(id);
     }
+    
+    public double getCGPA() {
+        return CGPA;
+    }
+
+    public void setCGPA(double CGPA) {
+        this.CGPA = CGPA;
+    }
+    
 
 }

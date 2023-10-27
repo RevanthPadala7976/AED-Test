@@ -11,8 +11,11 @@
 package UserInterface.WorkAreas.AdminRole;
 
 import Business.Business;
+import Business.UserAccounts.UserAccountDirectory;
 import UserInterface.WorkAreas.AdminRole.AdministerUserAccountsWorkResp.ManageUserAccountsJPanel;
 import UserInterface.WorkAreas.AdminRole.ManagePersonnelWorkResp.ManagePersonsJPanel;
+import UserInterface.WorkAreas.AdminRole.ManageStudents.ManageStudentsJPanel;
+import UserInterface.WorkAreas.AdminRole.MyProfile.AdminMyProfileJpanel;
 
 import javax.swing.JPanel;
 
@@ -85,7 +88,7 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
         jButton10.setBackground(new java.awt.Color(102, 153, 255));
         jButton10.setFont(getFont());
         jButton10.setForeground(new java.awt.Color(255, 255, 255));
-        jButton10.setText("Register  Persons (HR)");
+        jButton10.setText("Manage Persons");
         jButton10.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton10.setMaximumSize(new java.awt.Dimension(200, 40));
         jButton10.setMinimumSize(new java.awt.Dimension(20, 20));
@@ -181,10 +184,20 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
+        ManageStudentsJPanel aos = new ManageStudentsJPanel(business, CardSequencePanel);
+        
+        CardSequencePanel.add("Manage Students", aos);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
 
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton6IdentifyEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6IdentifyEventsActionPerformed
+       AdminMyProfileJpanel myp =  new AdminMyProfileJpanel(business, CardSequencePanel);
+     
+     
+     CardSequencePanel.add("view profile", myp);
+        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+
     }//GEN-LAST:event_jButton6IdentifyEventsActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed

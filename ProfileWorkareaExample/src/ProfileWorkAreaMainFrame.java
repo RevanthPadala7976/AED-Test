@@ -6,6 +6,7 @@
 package Business;
 
 import Business.Profiles.EmployeeProfile;
+import Business.Profiles.ProfessorProfile;
 import Business.Profiles.Profile;
 import Business.Profiles.StudentProfile;
 
@@ -65,7 +66,6 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(700, 575));
 
         actionsidejpanel.setMinimumSize(new java.awt.Dimension(200, 200));
 
@@ -150,15 +150,25 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
         String un = txt_UserName.getText();
         
         //Converting Char Array to the String type
-        String pw = hashPassword(new String(jpf_Password.getPassword()));
+//        String pw = hashPassword(new String(jpf_Password.getPassword()));
+
+        String pw = new String(jpf_Password.getPassword());
+        
+        System.out.println(pw);
 
         UserAccountDirectory uad = business.getUserAccountDirectory();
+        
+        for(UserAccount u : uad.getUserAccountList()){
+            System.out.println(u.getUserLoginName() + u.getRole());
+        }
+        
         UserAccount useraccount = uad.AuthenticateUser(un, pw);
+        
         if (useraccount == null) {
             
             JOptionPane.showMessageDialog(this, "Incorrect UserName or Password");
         }
-        else {
+        else if (useraccount!=null && useraccount.isIsEnabled()){
             StudentWorkAreaJPanel studentworkareajpanel;
             FacultyWorkAreaJPanel facultyworkarea;
             AdminRoleWorkAreaJPanel adminworkarea;
@@ -184,14 +194,14 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
                 ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
             }
 
- /*      if (profile instanceof FacultyProfile) {
-            facultyworkarea = new FacultyWorkAreaJPanel(business, CardSequencePanel);
-            CardSequencePanel.removeAll();
-            CardSequencePanel.add("faculty", facultyworkarea);
-            ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+            if (profile instanceof ProfessorProfile) {
+                facultyworkarea = new FacultyWorkAreaJPanel(business, CardSequencePanel);
+                CardSequencePanel.removeAll();
+                CardSequencePanel.add("faculty", facultyworkarea);
+                ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
 
+            }
         }
-*/      }
 
     }//GEN-LAST:event_LoginButtonActionPerformed
 
@@ -236,15 +246,12 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         /* Create and display the form */
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ProfileWorkAreaMainFrame().setVisible(true);
             }
         });
-    }
-    
-    public String hashPassword(String p){
-        return BCrypt.hashpw(p, BCrypt.gensalt());
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

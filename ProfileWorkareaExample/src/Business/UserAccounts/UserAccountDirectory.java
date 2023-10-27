@@ -5,15 +5,18 @@
  */
 package Business.UserAccounts;
 
+import Business.Person.Person;
 import Business.Profiles.Profile;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 /**
  *
  * @author kal bugrara
  */
-public class UserAccountDirectory {
+public class UserAccountDirectory{
     
       ArrayList<UserAccount> useraccountlist ;
     
@@ -23,9 +26,9 @@ public class UserAccountDirectory {
 
     }
 
-    public UserAccount newUserAccount(Profile p, String un, String pw) {
+    public UserAccount newUserAccount(Profile p, String un, String pw, boolean isEnabled) {
 
-        UserAccount ua = new UserAccount (p,  un,  pw);
+        UserAccount ua = new UserAccount (p,  un,  pw, isEnabled);
         useraccountlist.add(ua);
         return ua;
     }
@@ -65,5 +68,31 @@ public class UserAccountDirectory {
             }
         }
          return false;
+    }
+    
+    
+    //Validating Password
+    public boolean PasswordChecker(String password, String confirmPassword){
+        String regex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^a-zA-Z\\d]).{8,}$";
+        //this will return true or false
+        return password.matches(regex) && password.equals(confirmPassword);   
+    }
+    
+    
+    //UseraccoutDirectoryOutput
+    public void UseraccountDirectoryOutput(){
+        int i = 0;
+        
+        for (UserAccount user : useraccountlist){
+            
+            Profile profile = user.getAssociatedPersonProfile();
+            Person p = profile.getPerson();
+            
+            System.out.println(i + ". [Firstname: " + p.getFirstName() + ", Lastname: " + p.getLastName()
+            + ", EmailID: " + p.getEmailID() + ", Role: "+profile.getRole() + "]");
+            
+            i++;
+ 
+        }
     }
 }

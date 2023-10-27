@@ -6,13 +6,20 @@
 package UserInterface.WorkAreas.AdminRole.ManagePersonnelWorkResp;
 
 import Business.Business;
+import Business.Person.Person;
+import Business.Person.PersonDirectory;
+import Business.Profiles.Profile;
+import Business.UserAccounts.UserAccount;
+import Business.UserAccounts.UserAccountDirectory;
+import javax.swing.JOptionPane;
 
 
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author kal bugrara
+ * @author Nikesh
  */
 public class ManagePersonsJPanel extends javax.swing.JPanel {
 
@@ -21,12 +28,58 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
      */
     JPanel CardSequencePanel;
     Business business;
+    Person selectedPerson;
 
 
     public ManagePersonsJPanel(Business bz, JPanel jp) {
         CardSequencePanel = jp;
         this.business = bz;
         initComponents();
+         refreshTable();
+        
+
+    }
+    
+    public void refreshTable() {
+
+//clear supplier table
+        int rc = UserAccountTable.getRowCount();
+        int i;
+        for (i = rc - 1; i >= 0; i--) {
+            ((DefaultTableModel) UserAccountTable.getModel()).removeRow(i);
+        }
+
+        PersonDirectory pd = business.getPersonDirectory();
+
+        for (Person p : pd.getPersonlist()) {
+
+//            Profile profile = ua.getAssociatedPersonProfile();
+//            Person person = profile.getPerson();
+//            Object[] row = new Object[6];
+//            row[0] = ua;
+//            row[1] = ua.isIsEnabled();
+//            row[2] = ua.getRole();
+//            row[3] = person.getFirstName();
+//            row[4] = person.getLastName();
+//            row[5] = person.getEmailID();
+              Object[] row = new Object[6];
+              row[0] = p;
+              row[1] = p.getFirstName();
+              row[2] = p.getLastName();
+              row[3] = p.getEmailID();
+              row[4] = p.getSsn();
+              row[5] = p.getPassportNumber();
+            
+            
+            
+
+            System.out.println(p.getFirstName());
+            //           row[1] = ua.getStatus(); //complete this..
+            //           row[2] = ua.getLastUpdated()
+            //           row[3] = 
+
+            ((DefaultTableModel) UserAccountTable.getModel()).addRow(row);
+        }
 
     }
 
@@ -44,6 +97,8 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
         Next = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        UserAccountTable = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(0, 153, 153));
         setLayout(null);
@@ -55,7 +110,7 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
             }
         });
         add(Back);
-        Back.setBounds(20, 260, 76, 32);
+        Back.setBounds(20, 310, 74, 22);
 
         Next.setText("Next >>");
         Next.addActionListener(new java.awt.event.ActionListener() {
@@ -64,16 +119,37 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
             }
         });
         add(Next);
-        Next.setBounds(500, 260, 80, 32);
+        Next.setBounds(500, 310, 80, 22);
 
-        jLabel1.setText("Name");
+        jLabel1.setText("Persons");
         add(jLabel1);
-        jLabel1.setBounds(20, 60, 190, 16);
+        jLabel1.setBounds(30, 80, 190, 16);
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        jLabel2.setText("Manage Personnel (HR)");
+        jLabel2.setText("Manage Persons");
         add(jLabel2);
-        jLabel2.setBounds(21, 20, 550, 29);
+        jLabel2.setBounds(21, 20, 550, 28);
+
+        UserAccountTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Person ID", "First Name", "Last Name", "Email", "SSN", "Passport Number"
+            }
+        ));
+        UserAccountTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                UserAccountTableMousePressed(evt);
+            }
+        });
+        jScrollPane1.setViewportView(UserAccountTable);
+
+        add(jScrollPane1);
+        jScrollPane1.setBounds(30, 110, 550, 130);
     }// </editor-fold>//GEN-END:initComponents
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
@@ -86,19 +162,41 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
 
     private void NextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextActionPerformed
         // TODO add your handling code here:
+        if(selectedPerson==null){
+            JOptionPane.showMessageDialog(this, "Please select any user");
+        }
+        else{
+            AdministerPersonJPanel mppd = new AdministerPersonJPanel(selectedPerson,business, CardSequencePanel);
+            CardSequencePanel.add(mppd);
+            ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+        }
         
-        AdministerPersonJPanel mppd = new AdministerPersonJPanel(business, CardSequencePanel);
-        CardSequencePanel.add(mppd);
-        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
 
     }//GEN-LAST:event_NextActionPerformed
+
+    private void UserAccountTableMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_UserAccountTableMousePressed
+        // Extracts the row (uaser account) in the table that is selected by the user
+        int size = UserAccountTable.getRowCount();
+        int selectedrow = UserAccountTable.getSelectionModel().getLeadSelectionIndex();
+
+        if (selectedrow < 0 || selectedrow > size - 1) {
+            return;
+        }
+        selectedPerson = (Person) UserAccountTable.getValueAt(selectedrow, 0);
+        if (selectedPerson == null) {
+            return;
+        }
+
+    }//GEN-LAST:event_UserAccountTableMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;
     private javax.swing.JButton Next;
+    private javax.swing.JTable UserAccountTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
 }

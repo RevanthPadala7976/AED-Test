@@ -6,12 +6,17 @@
 package UserInterface.WorkAreas.AdminRole.ManagePersonnelWorkResp;
 
 import Business.Business;
+import Business.Person.Person;
+import Business.Person.PersonDirectory;
+import Business.Profiles.Profile;
+import UserInterface.WorkAreas.AdminRole.AdministerUserAccountsWorkResp.ManageUserAccountsJPanel;
+import java.awt.Component;
 
 import javax.swing.JPanel;
 
 /**
  *
- * @author kal bugrara
+ * @author Nikesh
  */
 public class AdministerPersonJPanel extends javax.swing.JPanel {
 
@@ -21,13 +26,21 @@ public class AdministerPersonJPanel extends javax.swing.JPanel {
     JPanel CardSequencePanel;
 
     Business business;
+    PersonDirectory personDirectory;
+    Person selectedPerson;
 
-    public AdministerPersonJPanel(Business bz, JPanel jp) {
+    public AdministerPersonJPanel(Person p, Business bz, JPanel jp) {
 
         CardSequencePanel = jp;
         this.business = bz;
+        selectedPerson = p;
         initComponents();
-
+        
+        jTextField1.setText(selectedPerson.getFirstName());
+        jTextField2.setText(selectedPerson.getLastName());
+        jTextField4.setText(selectedPerson.getEmailID());
+        jTextField5.setText(selectedPerson.getSsn());
+        jTextField6.setText(selectedPerson.getPassportNumber());
 
     }
 
@@ -46,6 +59,17 @@ public class AdministerPersonJPanel extends javax.swing.JPanel {
 
         Back = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jTextField4 = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jTextField5 = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jTextField6 = new javax.swing.JTextField();
+        Update = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 153, 153));
         setLayout(null);
@@ -57,12 +81,59 @@ public class AdministerPersonJPanel extends javax.swing.JPanel {
             }
         });
         add(Back);
-        Back.setBounds(30, 290, 76, 32);
+        Back.setBounds(40, 410, 74, 22);
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel2.setText("Manage Person Profile");
         add(jLabel2);
-        jLabel2.setBounds(21, 20, 550, 29);
+        jLabel2.setBounds(21, 20, 550, 28);
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel1.setText("First Name :");
+        add(jLabel1);
+        jLabel1.setBounds(150, 90, 110, 16);
+        add(jTextField1);
+        jTextField1.setBounds(280, 90, 190, 22);
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel3.setText("Last Name :");
+        add(jLabel3);
+        jLabel3.setBounds(150, 150, 70, 16);
+
+        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField2ActionPerformed(evt);
+            }
+        });
+        add(jTextField2);
+        jTextField2.setBounds(280, 150, 190, 22);
+
+        jLabel6.setText("Email :");
+        add(jLabel6);
+        jLabel6.setBounds(150, 210, 35, 16);
+        add(jTextField4);
+        jTextField4.setBounds(280, 200, 190, 22);
+
+        jLabel7.setText("SSN :");
+        add(jLabel7);
+        jLabel7.setBounds(160, 260, 70, 16);
+        add(jTextField5);
+        jTextField5.setBounds(280, 250, 190, 22);
+
+        jLabel8.setText("Passport Number :");
+        add(jLabel8);
+        jLabel8.setBounds(140, 300, 90, 20);
+        add(jTextField6);
+        jTextField6.setBounds(280, 300, 190, 22);
+
+        Update.setText("Update>>");
+        Update.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateActionPerformed(evt);
+            }
+        });
+        add(Update);
+        Update.setBounds(490, 410, 100, 22);
     }// </editor-fold>//GEN-END:initComponents
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
@@ -73,10 +144,50 @@ public class AdministerPersonJPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_BackActionPerformed
 
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateActionPerformed
+        // TODO add your handling code here:
+        PersonDirectory pd = business.getPersonDirectory();
+        for(Person p : pd.getPersonlist()){
+            if(p.getPersonId().equals(selectedPerson.getPersonId()))
+            {
+                p.setFirstName(jTextField1.getText());
+                p.setLastName(jTextField2.getText());
+                p.setEmailID(jTextField4.getText());
+                p.setSsn(jTextField5.getText());
+                p.setPassportNumber(jTextField6.getText());
+                
+                    
+                Component component = CardSequencePanel.getComponent(1);
+                ManagePersonsJPanel managepersons = (ManagePersonsJPanel) component;
+
+                CardSequencePanel.remove(this);
+                ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+                managepersons.refreshTable();
+            }
+        }
+        
+
+    }//GEN-LAST:event_UpdateActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;
+    private javax.swing.JButton Update;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables
 
 }

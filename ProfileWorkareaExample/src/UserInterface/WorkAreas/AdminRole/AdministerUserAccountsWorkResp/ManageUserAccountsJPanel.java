@@ -6,8 +6,12 @@
 package UserInterface.WorkAreas.AdminRole.AdministerUserAccountsWorkResp;
 
 import Business.Business;
+import Business.Person.Person;
+import Business.Profiles.Profile;
 import Business.UserAccounts.UserAccount;
 import Business.UserAccounts.UserAccountDirectory;
+import UserInterface.WorkAreas.AdminRole.AdminRoleWorkAreaJPanel;
+import javax.swing.JOptionPane;
 
 
 import javax.swing.JPanel;
@@ -15,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author kal bugrara
+ * @author Nikesh
  */
 public class ManageUserAccountsJPanel extends javax.swing.JPanel {
 
@@ -30,7 +34,10 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
     public ManageUserAccountsJPanel(Business bz, JPanel jp) {
         CardSequencePanel = jp;
         this.business = bz;
+        
         initComponents();
+        
+        
         refreshTable();
 
     }
@@ -52,13 +59,22 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
 
         for (UserAccount ua : uad.getUserAccountList()) {
 
-            Object[] row = new Object[5];
+            Profile profile = ua.getAssociatedPersonProfile();
+            Person person = profile.getPerson();
+            Object[] row = new Object[6];
             row[0] = ua;
+            row[1] = ua.isIsEnabled();
+            row[2] = ua.getRole();
+//            row[3] = person.getFirstName();
+//            row[4] = person.getLastName();
+//            row[5] = person.getEmailID();
+            
+            System.out.println(person.getFirstName());
  //           row[1] = ua.getStatus(); //complete this..
  //           row[2] = ua.getLastUpdated()
  //           row[3] = 
 
-            ((DefaultTableModel) UserAccountTable.getModel()).addRow(row);
+          ((DefaultTableModel) UserAccountTable.getModel()).addRow(row);
         }
 
     }
@@ -90,7 +106,7 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
             }
         });
         add(Back);
-        Back.setBounds(30, 300, 76, 32);
+        Back.setBounds(30, 300, 80, 23);
 
         Next.setText("Next >>");
         Next.addActionListener(new java.awt.event.ActionListener() {
@@ -99,29 +115,37 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
             }
         });
         add(Next);
-        Next.setBounds(500, 300, 80, 32);
+        Next.setBounds(500, 300, 80, 23);
 
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel1.setText("User Accounts");
         add(jLabel1);
-        jLabel1.setBounds(30, 90, 190, 19);
+        jLabel1.setBounds(30, 90, 190, 17);
 
         jLabel2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         jLabel2.setText("Manage User Accounts");
         add(jLabel2);
-        jLabel2.setBounds(21, 20, 550, 29);
+        jLabel2.setBounds(21, 20, 550, 28);
 
         UserAccountTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "User Name", "Status", "Last Activity", "Last Updated"
+                "User Name", "isEnabled", "Role"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         UserAccountTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 UserAccountTableMousePressed(evt);
@@ -135,18 +159,29 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
         // TODO add your handling code here:
-        CardSequencePanel.remove(this);
-        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+        
+//        AdminRoleWorkAreaJPanel adminWorkArea = new AdminRoleWorkAreaJPanel(business, CardSequencePanel);
+//        CardSequencePanel.remove(this);
+//        CardSequencePanel.add(adminWorkArea);
+//        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+          
+          CardSequencePanel.remove(this);
+          ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
  //       ((java.awt.CardLayout)CardSequencePanel.getLayout()).show(CardSequencePanel, "IdentifyEventTypes");
 
     }//GEN-LAST:event_BackActionPerformed
 
     private void NextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NextActionPerformed
         // TODO add your handling code here:
-        if(selecteduseraccount==null) return;
-        AdminUserAccount mppd = new AdminUserAccount(selecteduseraccount, CardSequencePanel);
-        CardSequencePanel.add(mppd);
-        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+        if(selecteduseraccount==null){
+            JOptionPane.showMessageDialog(this, "Please select any user");
+        }
+        else{
+            AdminUserAccount mppd = new AdminUserAccount(selecteduseraccount, CardSequencePanel, business);
+            CardSequencePanel.add(mppd);
+            ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+        }
+        
 
     }//GEN-LAST:event_NextActionPerformed
 

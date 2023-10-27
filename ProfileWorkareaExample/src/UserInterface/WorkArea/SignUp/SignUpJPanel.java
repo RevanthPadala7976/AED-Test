@@ -11,6 +11,8 @@ import Business.Business;
 import Business.Person.Person;
 import Business.Person.PersonDirectory;
 import Business.ProfileWorkAreaMainFrame;
+import Business.Profiles.ProfessorDirectory;
+import Business.Profiles.ProfessorProfile;
 import Business.Profiles.Profile;
 import Business.Profiles.StudentDirectory;
 import Business.Profiles.StudentProfile;
@@ -34,17 +36,21 @@ public class SignUpJPanel extends javax.swing.JPanel {
      */
     JPanel CardSequencePanel;
     Business business;
-    
     StudentDirectory studentDirectory = new StudentDirectory();
-    UserAccountDirectory userAccountDirectory = new UserAccountDirectory();
-    PersonDirectory personDirectory = new PersonDirectory();
+    ProfessorDirectory professorDirectory;
+    
+    
+    
     
     public SignUpJPanel(Business b, JPanel cs) {
+        this.business = b;
+        this.CardSequencePanel = cs;
+        professorDirectory = business.getProfessorDirectory();
+        
         initComponents();
         
         
-        this.business = b;
-        this.CardSequencePanel = cs;
+        
     }
 
     /**
@@ -75,6 +81,10 @@ public class SignUpJPanel extends javax.swing.JPanel {
         lbl_SignUpSkillPulseID = new javax.swing.JLabel();
         lbl_SignUpUserName = new javax.swing.JLabel();
         btn_Back = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        txt_SignUpSSN = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txt_SignUpPasswordNumber = new javax.swing.JTextField();
 
         lbl_title.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         lbl_title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -112,6 +122,11 @@ public class SignUpJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel1.setText("SSN:");
+
+        jLabel2.setText("Passport Number:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,20 +135,6 @@ public class SignUpJPanel extends javax.swing.JPanel {
                 .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lbl_title, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbl_SignUpFirstName)
-                            .addComponent(lbl_SignUpEmailID)
-                            .addComponent(lbl_SignUpLastName)
-                            .addComponent(lbl_SignUpSkillPulseID)
-                            .addComponent(lbl_SignUpRole))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_SignUpFirstName)
-                            .addComponent(txt_SignUpLastName)
-                            .addComponent(txt_SignUpEmailID)
-                            .addComponent(txt_SignUpSkillPulseID, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jcb_SignUpRole, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lbl_SignUpUserName)
@@ -147,8 +148,26 @@ public class SignUpJPanel extends javax.swing.JPanel {
                                 .addComponent(btn_Back))
                             .addComponent(txt_SignUpUserName)
                             .addComponent(jpf_SignUpCreatePassword)
-                            .addComponent(jpf_SignUpConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(169, Short.MAX_VALUE))
+                            .addComponent(jpf_SignUpConfirmPassword, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(lbl_SignUpFirstName)
+                            .addComponent(lbl_SignUpEmailID)
+                            .addComponent(lbl_SignUpSkillPulseID)
+                            .addComponent(lbl_SignUpRole)
+                            .addComponent(lbl_SignUpLastName)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txt_SignUpFirstName)
+                            .addComponent(txt_SignUpLastName)
+                            .addComponent(txt_SignUpEmailID)
+                            .addComponent(txt_SignUpSkillPulseID, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                            .addComponent(jcb_SignUpRole, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_SignUpSSN)
+                            .addComponent(txt_SignUpPasswordNumber))))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,29 +188,37 @@ public class SignUpJPanel extends javax.swing.JPanel {
                     .addComponent(txt_SignUpEmailID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_SignUpSkillPulseID)
-                    .addComponent(txt_SignUpSkillPulseID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(2, 2, 2)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_SignUpRole)
-                    .addComponent(jcb_SignUpRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_SignUpUserName)
-                    .addComponent(txt_SignUpUserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_SignUpSSN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(txt_SignUpPasswordNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txt_SignUpSkillPulseID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_SignUpSkillPulseID))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jcb_SignUpRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_SignUpRole))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_SignUpUserName)
+                    .addComponent(txt_SignUpUserName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lbl_SignUpCreatePassword)
-                    .addComponent(jpf_SignUpCreatePassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jpf_SignUpCreatePassword, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_SignUpConfirmPassword)
                     .addComponent(jpf_SignUpConfirmPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_SignUpSave)
                     .addComponent(btn_Back))
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addGap(33, 33, 33))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -211,6 +238,24 @@ public class SignUpJPanel extends javax.swing.JPanel {
 
     private void SignUpValidations(){
         
+        PersonDirectory personDirectory = business.getPersonDirectory();
+        
+        UserAccountDirectory userAccountDirectory = business.getUserAccountDirectory();
+        
+        String FirstName = txt_SignUpFirstName.getText();
+        String LastName = txt_SignUpLastName.getText();
+        String EmailID = txt_SignUpEmailID.getText();
+        String ID = txt_SignUpSkillPulseID.getText();
+        String userName = txt_SignUpUserName.getText();
+        String ssn = txt_SignUpSSN.getText();
+        String passportNumber = txt_SignUpPasswordNumber.getText();
+        
+        String createPassword = new String(jpf_SignUpCreatePassword.getPassword());
+        String confirmPassword = new String(jpf_SignUpConfirmPassword.getPassword());
+        
+        System.out.println("Create Password: "+ createPassword);
+        System.out.println("Confirm Password: "+ confirmPassword);
+        
         if(txt_SignUpFirstName.getText().equals("") 
                 || txt_SignUpLastName.getText().equals("")
                 || txt_SignUpSkillPulseID.getText().equals("") 
@@ -222,59 +267,103 @@ public class SignUpJPanel extends javax.swing.JPanel {
             
             JOptionPane.showMessageDialog(this, "Madatory fields are missing");
         }
-        else if(!Arrays.equals(jpf_SignUpCreatePassword.getPassword(), jpf_SignUpConfirmPassword.getPassword())){
-            JOptionPane.showMessageDialog(this, "Password didn't Match!");
+        
+        /*
+            *Password Constraint:
+                * Password should contain at least 8 Characters
+                * It should have Uppercase letter, lowercase letter, and special characters
+        */
+        //else if()
+        else if(!userAccountDirectory.PasswordChecker(createPassword, confirmPassword)){
+            JOptionPane.showMessageDialog(this, "Password didn't Match or It doesn't meet requirements");
         }
         else if(personDirectory.findPerson(txt_SignUpSkillPulseID.getText()) != null){
-            JOptionPane.showMessageDialog(this, "User already registered");
+            JOptionPane.showMessageDialog(this, "User ID is already registered");
         }
-        else {
-            String FirstName = txt_SignUpFirstName.getText();
-            String LastName = txt_SignUpLastName.getText();
-            String EmailID = txt_SignUpEmailID.getText();
-            String ID = txt_SignUpSkillPulseID.getText();
-            String userName = txt_SignUpUserName.getText();
-            String password = hashPassword(new String(jpf_SignUpCreatePassword.getPassword()));
+        else if (userAccountDirectory.checkUserName(userName)) {
+            JOptionPane.showMessageDialog(this, "UserName alread taken, please try using another");
+        }
+        else{   
+//            String password = hashPassword(new String(jpf_SignUpCreatePassword.getPassword()));
+
+            String password = BCrypt.hashpw(new String(jpf_SignUpCreatePassword.getPassword()), BCrypt.gensalt());
 
             //Role
-            if (jcb_SignUpRole.getSelectedItem().equals("Student")){
-                
-                if(userAccountDirectory.checkUserName(userName)){
-                    JOptionPane.showMessageDialog(this, "UserName alread taken, please try using another");
-                }
-                else {
-                    //System.out.println("Saveing Student profile");
-                    Person p = personDirectory.newPerson(FirstName, LastName, EmailID, ID);
-                    
-                    StudentProfile studentProfile = studentDirectory.newStudentProfile(p);
+            if (jcb_SignUpRole.getSelectedItem().equals("Student")) {
+                //System.out.println("Saveing Student profile");
+//              Person p = personDirectory.newPerson(FirstName, LastName, EmailID, ID);
 
-                    System.out.println("Student List: ");
-                    Output();
+//              PersonDirectory pad = business.getPersonDirectory();
+                Person p = personDirectory.newPerson(FirstName, LastName, EmailID, ID);
+                p.setSsn(ssn);
+                p.setPassportNumber(passportNumber);
 
-                    UserAccount user = userAccountDirectory.newUserAccount(studentProfile, userName, password);
-                    
-                    //CLEAR ALL THE FIELDS
-                }
-            }
-            else{
+                StudentProfile studentProfile = studentDirectory.newStudentProfile(p);
+
+                System.out.println("Student List: ");
+                StudentOutput();
+
+//              UserAccount user = userAccountDirectory.newUserAccount(studentProfile, userName, password);
+//              UserAccountDirectory uad = business.getUserAccountDirectory();
+                UserAccount user = userAccountDirectory.newUserAccount(studentProfile, userName, password, false);
+
+                //CLEAR ALL THE FIELDS
+                JOptionPane.showMessageDialog(this, "Information Saved successfully");
+
+                txt_SignUpFirstName.setText("");
+                txt_SignUpLastName.setText("");
+                txt_SignUpEmailID.setText("");
+                txt_SignUpSSN.setText("");
+                txt_SignUpPasswordNumber.setText("");
+                txt_SignUpSkillPulseID.setText("");
+                jcb_SignUpRole.setSelectedItem("None");
+
+                txt_SignUpUserName.setText("");
+                jpf_SignUpCreatePassword.setText("");
+                jpf_SignUpConfirmPassword.setText("");
+
+            } 
+            else {
                 //Add Professor
+                Person p = personDirectory.newPerson(FirstName, LastName, EmailID, ID);
+                p.setSsn(ssn);
+                p.setPassportNumber(passportNumber);
+                
+                ProfessorProfile professorProfile = professorDirectory.newProfessorProfile(p);
+                
+                System.out.println("Professor Profile: ");
+                ProfessorOutput();
+                
+                UserAccount user = userAccountDirectory.newUserAccount(professorProfile, userName, password, false);
+                
+                //CLEAR ALL THE FIELDS
+                JOptionPane.showMessageDialog(this, "Information Saved successfully");
+
+                txt_SignUpFirstName.setText("");
+                txt_SignUpLastName.setText("");
+                txt_SignUpEmailID.setText("");
+                txt_SignUpSSN.setText("");
+                txt_SignUpPasswordNumber.setText("");
+                txt_SignUpSkillPulseID.setText("");
+                jcb_SignUpRole.setSelectedItem("None");
+
+                txt_SignUpUserName.setText("");
+                jpf_SignUpCreatePassword.setText("");
+                jpf_SignUpConfirmPassword.setText("");
+
             }
- 
             
-            
-            
+
         }
-        
-        //Password
-        
-        
-        
+        System.out.println("");
+        System.out.println("User Accounts: ");
+        userAccountDirectory.UseraccountDirectoryOutput();
         
     }
     
     
-    //For Netbeans Output
-    public void Output(){
+    //For Netbeans StudentOutput
+    public void StudentOutput(){
         ArrayList<StudentProfile> studentList = studentDirectory.getStudentlist();
         int i = 0;
         for(StudentProfile sp : studentList){
@@ -283,6 +372,19 @@ public class SignUpJPanel extends javax.swing.JPanel {
             + ", EmailID: " + p.getEmailID() + ", Role: "+sp.getRole() + "]");
             
            i++;
+        }
+    }
+    
+    //For Netbeans ProfessorOutput
+    public void ProfessorOutput(){
+        ArrayList<ProfessorProfile> professorList = professorDirectory.getProfessorlist();
+        int i = 0;
+        for(ProfessorProfile pp : professorList){
+            Person p = pp.getPerson();
+            System.out.println(i + ". [Firstname: " + p.getFirstName() + ", Lastname: " + p.getLastName()
+            + ", EmailID: " + p.getEmailID() + ", Role: "+pp.getRole() + "]");
+            
+            i++;
         }
     }
     
@@ -300,6 +402,8 @@ public class SignUpJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Back;
     private javax.swing.JButton btn_SignUpSave;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JComboBox<String> jcb_SignUpRole;
     private javax.swing.JPasswordField jpf_SignUpConfirmPassword;
     private javax.swing.JPasswordField jpf_SignUpCreatePassword;
@@ -315,6 +419,8 @@ public class SignUpJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txt_SignUpEmailID;
     private javax.swing.JTextField txt_SignUpFirstName;
     private javax.swing.JTextField txt_SignUpLastName;
+    private javax.swing.JTextField txt_SignUpPasswordNumber;
+    private javax.swing.JTextField txt_SignUpSSN;
     private javax.swing.JTextField txt_SignUpSkillPulseID;
     private javax.swing.JTextField txt_SignUpUserName;
     // End of variables declaration//GEN-END:variables
